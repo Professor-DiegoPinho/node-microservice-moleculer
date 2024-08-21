@@ -14,9 +14,22 @@ broker.createService({
       {
         path: "/api",
         aliases: {
-          "GET /user": "user.getUser",
-          "POST /login": "auth.login",
-          "GET /auth-action": "user.authenticatedAction"
+          "POST /sign-up": "auth.signUp",
+          "POST /sign-in": "auth.signIn",
+          "GET /auth-action": {
+            action: "user.action",
+            before: async (req, res, next) => {
+              const ctx = req.$ctx;
+
+              const authorization = ctx.meta.headers["authorization"];
+              const token = authorization.replace("Bearer ", "");
+
+              const user = ctx.call("auth.validateToken", { token });
+              if (user.error) { return "failed" }
+
+              next();
+            }
+          }
         }
       }
     ]

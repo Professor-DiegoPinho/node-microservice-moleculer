@@ -1,5 +1,7 @@
 import { ServiceBroker } from "moleculer";
 
+const users = [];
+
 const broker = new ServiceBroker({
   nodeID: "auth-service-node",
   transporter: "NATS"
@@ -8,13 +10,39 @@ const broker = new ServiceBroker({
 broker.createService({
   name: "auth",
   actions: {
-    login(ctx) {
+    signUp(ctx) {
       const { username, password } = ctx.params;
-      // Lógica de autenticação fictícia
-      if (username === "admin" && password === "admin") {
-        return { token: "123456" };
+      users.push({
+        username,
+        password
+      });
+
+      return "User created."
+    },
+
+    signIn(ctx) {
+      const { username, password } = ctx.params;
+      const user = users.find(user => user.username === username);
+      if (user && user.password === password) {
+        const token = "lorem-ipsum";
+        user.token = token;
+        return {
+          token
+        }
       }
-      return { error: "Invalid credentials" };
+
+      return { error: "Invalid credentials" }
+    },
+
+    validateToken(ctx) {
+      console.log("to passando aqui veínho")
+      console.log(user)
+
+      const { token } = ctx.params;
+      const user = users.find(user => user.token === token);
+      if (!user) return { error: "Invalid token." }
+
+      return user;
     }
   }
 });

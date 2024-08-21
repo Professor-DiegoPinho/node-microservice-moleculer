@@ -8,15 +8,9 @@ const broker = new ServiceBroker({
 broker.createService({
   name: "user",
   actions: {
-    getUser(ctx) {
-      return { id: 1, name: "John Doe" };
-    },
-    async authenticatedAction(ctx) {
-      const response = await ctx.call("auth.login", { username: "admin", password: "admin" });
-      if (response.token) {
-        return "Authorized Action Performed";
-      }
-      return "Authorization Failed";
+    action(ctx) {
+      const user = ctx.params;
+      return `deu bom!, ${user.username}`;
     }
   }
 });
