@@ -1,6 +1,9 @@
 import { ServiceBroker } from "moleculer";
 
-const broker = new ServiceBroker();
+const broker = new ServiceBroker({
+  nodeID: "auth-service-node",
+  transporter: "NATS"
+});
 
 broker.createService({
   name: "auth",
@@ -17,6 +20,5 @@ broker.createService({
 });
 
 broker.start().then(() => {
-  // O serviço está ativo e rodando
   broker.repl();
 })

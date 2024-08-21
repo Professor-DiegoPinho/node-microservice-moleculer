@@ -3,7 +3,7 @@ import ApiGateway from "moleculer-web";
 
 const broker = new ServiceBroker({
   nodeID: "gateway-node",
-  transporter: "NATS" // Mesmo transmissor para comunicação
+  transporter: "NATS"
 });
 
 broker.createService({

@@ -2,7 +2,7 @@ import { ServiceBroker } from "moleculer";
 
 const broker = new ServiceBroker({
   nodeID: "user-service-node",
-  transporter: "NATS" // Transmissor para comunicação entre microserviços
+  transporter: "NATS"
 });
 
 broker.createService({
@@ -22,6 +22,5 @@ broker.createService({
 });
 
 broker.start().then(() => {
-  // O serviço está ativo e rodando
   broker.repl();
 })
