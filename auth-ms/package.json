@@ -1,0 +1,18 @@
+{
+  "name": "auth-ms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node auth.service.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "moleculer": "^0.14.34",
+    "moleculer-repl": "^0.7.4",
+    "moleculer-web": "^0.10.7"
+  }
+}
