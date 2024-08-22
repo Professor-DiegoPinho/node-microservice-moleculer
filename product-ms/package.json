@@ -1,11 +1,11 @@
 {
-  "name": "user-ms",
+  "name": "product-ms",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node user.service.js",
-    "dev": "nodemon user.service.js"
+    "start": "node product.service.js",
+    "dev": "nodemon product.service.js"
   },
   "keywords": [],
   "author": "",

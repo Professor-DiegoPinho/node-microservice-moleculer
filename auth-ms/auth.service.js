@@ -1,4 +1,5 @@
 import { ServiceBroker } from "moleculer";
+import { v4 as uuidv4 } from 'uuid';
 
 const users = [];
 
@@ -24,7 +25,7 @@ broker.createService({
       const { username, password } = ctx.params;
       const user = users.find(user => user.username === username);
       if (user && user.password === password) {
-        const token = "lorem-ipsum";
+        const token = uuidv4();
         user.token = token;
         return {
           token
@@ -35,9 +36,6 @@ broker.createService({
     },
 
     validateToken(ctx) {
-      console.log("to passando aqui veínho")
-      console.log(user)
-
       const { token } = ctx.params;
       const user = users.find(user => user.token === token);
       if (!user) return { error: "Invalid token." }

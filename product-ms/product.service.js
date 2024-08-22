@@ -1,16 +1,20 @@
 import { ServiceBroker } from "moleculer";
 
+const products = [
+  { id: 1, name: "PC da Xuxa", price: 15000 }
+]
+
 const broker = new ServiceBroker({
-  nodeID: "user-service-node",
+  nodeID: "product-service-node",
   transporter: "NATS"
 });
 
 broker.createService({
-  name: "user",
+  name: "product",
   actions: {
-    action(ctx) {
+    getProducts(ctx) {
       const user = ctx.params;
-      return `deu bom!, ${user.username}`;
+      return products;
     }
   }
 });
